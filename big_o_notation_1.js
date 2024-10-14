@@ -27,3 +27,12 @@ const t2 = performance.now();
 addUpToB(100000000);
 const t3 = performance.now();
 console.log(`Call to doSomething took ${(t3 - t2) / 1000} seconds.`);
+
+// O(n²)
+function printAllParis(n) {
+  for (var i = 0; i < n; i++) {
+    for (var j = 0; j < n; j++) {
+      console.log(i, j);
+    }
+  }
+}

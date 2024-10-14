@@ -1,3 +1,4 @@
+// O(n)
 function addUpToA(n) {
   let total = 0;
   for (let i = 1; i <= n; i++) {
@@ -9,6 +10,7 @@ function addUpToA(n) {
 // 6
 console.log(addUpToA(6));
 
+// O(1)
 function addUpToB(n) {
   return (n * (n + 1)) / 2;
 }

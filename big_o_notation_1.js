@@ -46,6 +46,7 @@ function printAllParis(n) {
 // O(log n) - 로그 시간 복잡도 (Logarithmic Time Complexity)
 // O(n log n) - 선형 로그 시간 복잡도 (Linearithmic Time Complexity)
 
+// O(n)
 function logAtLeast5(n) {
   for (var i = 1; i <= Math.max(5, n); i++) {
     console.log(i);
@@ -54,3 +55,13 @@ function logAtLeast5(n) {
 
 logAtLeast5(3);
 logAtLeast5(20);
+
+function logAtMost5(n) {
+  for (var i = 1; i <= Math.min(5, n); i++) {
+    console.log(i);
+  }
+}
+
+//O(1)
+logAtMost5(3);
+logAtMost5(20);

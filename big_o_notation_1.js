@@ -45,3 +45,12 @@ function printAllParis(n) {
 // 입력 크기 n이 증가할 때, 실행 시간이 n²에 비례하여 증가하는 알고리즘.
 // O(log n) - 로그 시간 복잡도 (Logarithmic Time Complexity)
 // O(n log n) - 선형 로그 시간 복잡도 (Linearithmic Time Complexity)
+
+function logAtLeast5(n) {
+  for (var i = 1; i <= Math.max(5, n); i++) {
+    console.log(i);
+  }
+}
+
+logAtLeast5(3);
+logAtLeast5(20);

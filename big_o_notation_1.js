@@ -10,7 +10,7 @@ function addUpToA(n) {
 // 6
 console.log(addUpToA(6));
 
-// O(1)
+// O(1), 가우스의 법칙
 function addUpToB(n) {
   return (n * (n + 1)) / 2;
 }

@@ -39,17 +39,6 @@ function getSortedPlans(plans) {
   return plans;
 }
 
-function getSortedPlans(plans) {
-  plans.sort((a, b) => {
-    const timeA = new Date(`1970-01-01T${a[1]}:00`);
-    const timeB = new Date(`1970-01-01T${b[1]}:00`);
-
-    return timeA - timeB;
-  });
-
-  return plans;
-}
-
 function solution(plans) {
   const result = [];
   const stopTasks = [];
@@ -71,32 +60,110 @@ function solution(plans) {
 
     // 현재 과제 시간에서 이전 과제 시간을 뺐을 때 이전 과제 소요시간보다 적을 경
     // 과제를 끝내지 못한 케이스로 이전 과제의 이름을 저장.
+    console.log(`현재 과제 총 시간 : ${currentSumM + parseInt(playtime)}`);
+    console.log(`다음 과제 시간 : ${nextSumM}`);
     const studyTime = nextSumM - currentSumM;
-    console.log(currentSumM, nextSumM, nextPlaytime, studyTime);
-    if (studyTime < parseInt(nextPlaytime)) {
+    if (currentSumM + parseInt(playtime) > nextSumM) {
       // console.log(name, start, playtime)
       // 끝내지 못한 과제의 이름과 시작 시간, 남은 과제 시간을 저장.
-      stopTasks.push([name, start, playtime - studyTime]);
-    }
-    //      else if (i > 0) {
-    //          // console.log(sortedPlans[i], i)
-    //          // if (!sortedPlans[i + 1]) return
-    //          // const [nextName, nextStart, nextPlaytime] = sortedPlans[i + 1] ?? ['', '', '']
-    //          // const [nextH, nextM] = nextStart.split(':')
-    //          // const nextSumM = (parseInt(nextH) * 60) + parseInt(nextM)
-    //          const lastStopTask = stopTasks[stopTasks.length - 1]
+      console.log(
+        `끝내지 못한 과제: ${name}, ${studyTime}, ${parseInt(nextPlaytime)}`
+      );
+      stopTasks.push([name, start, parseInt(playtime) - studyTime]);
+    } else {
+      console.log(`끝내지 못한 과제 목록 ${stopTasks}`);
+      if (stopTasks.length) {
+        console.log(`if (stopTasks.length): ${name}`);
+        const [stopName, stopStart, remainingTime] =
+          stopTasks[stopTasks.length - 1];
+        const currentTime = currentSumM + parseInt(playtime);
 
-    //          const spareTime = currentSumM - nextSumM
-    //          if(stopTasks.length) {
-    //              if(spareTime > lastStopTask[2]){
-    //                  // stopTasks.pop()
-    //              } else {
-    //                  // console.log(lastStopTask, spareTime, lastStopTask[2], nextH, nextM)
-    //                  stopTasks[stopTasks.length - 1][2] = Math.abs(spareTime - lastStopTask[2])
-    //              }
-    //          }
-    //      }
+        // 남은 시간 - 다음 시간과 현재 시간의 간격이 0 이상이면
+        // 여유 시간에 남은 과제를 완료하지 못한 경우 남은 과제 시간 업데이트.
+        if (remainingTime - (nextSumM - currentTime) > 0) {
+          stopTasks[stopTasks.length - 1][2] =
+            remainingTime - (nextSumM - currentTime);
+          console.log(name, stopTasks[stopTasks.length - 1]);
+        } else {
+          console.log(`finish: ${name}`);
+          result.push(name);
+
+          stopTasks.reverse().forEach((task) => {
+            result.push(task[0]);
+          });
+        }
+      }
+    }
   }
 
-  return stopTasks;
+  return result;
+}
+
+function solution(plans) {
+  const queue = plans
+    .map((plan) => {
+      const [name, time, spend] = plan;
+      const [hour, minute] = time.split(":");
+      const convertedTime = Number(hour) * 60 + Number(minute);
+
+      return [name, convertedTime, Number(spend)];
+    })
+    .sort((a, b) => a[1] - b[1]);
+
+  const result = [];
+  // 첫 번째 과제
+  const first = queue.shift();
+
+  // 현재 시간
+  let curTime = first[1];
+
+  // 최근 과제, 첫 번째 과제가 기본 값.
+  const stack = [first];
+
+  console.log("queue", queue);
+  console.log("first", first);
+  console.log("curTime", curTime);
+  console.log("stack", stack);
+
+  while (queue.length) {
+    const target = queue.shift();
+    const [_name, time, _spend] = target;
+
+    console.log("time", time);
+    console.log("curTime", curTime);
+
+    // 다음 과제와 이전 과제 시간의 차이
+    let timeDiff = time - curTime;
+
+    // 시간 업데이트
+    curTime = time;
+
+    console.log("timeDiff", timeDiff);
+    console.log("curTime", curTime);
+
+    while (stack.length && timeDiff > 0) {
+      const latestPlan = stack.pop();
+      const [lName, _lTime, lSpend] = latestPlan;
+
+      // console.log("lSpend <= timeDiff", lSpend, timeDiff);
+
+      // 이전 과제의 소요 시간이 다음 과제 사이 동안 끝난다면 result.push,
+      if (lSpend <= timeDiff) {
+        result.push(lName);
+        timeDiff -= lSpend;
+      } else {
+        latestPlan[2] = lSpend - timeDiff;
+        timeDiff = 0;
+        stack.push(latestPlan);
+      }
+    }
+
+    stack.push(target);
+  }
+
+  while (stack.length) {
+    result.push(stack.pop()[0]);
+  }
+
+  return result;
 }

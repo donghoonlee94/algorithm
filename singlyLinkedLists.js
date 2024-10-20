@@ -24,6 +24,7 @@ class SinglyLinkedList {
       this.tail = this.head;
     } else {
       // 기존 tail.next에 새로운 노드 추가 후 tail 업데이트
+      // this.head와 this.tail은 같은 노드를 참조하기 때문에 head.next에 새로운 노드가 같이 추가됨. 그리고 tail 업데이트.
       this.tail.next = newNode;
       this.tail = newNode;
     }
@@ -32,16 +33,41 @@ class SinglyLinkedList {
 
     return this;
   }
+
+  //   traverse() {
+  //     let current = this.head;
+  //     while (current) {
+  //       console.log(current.val);
+  //       current = current.next;
+  //     }
+  //   }
+
+  pop() {
+    if (!this.head) return undefined;
+
+    let current = this.head;
+    let newTail = current;
+
+    while (current.next) {
+      newTail = current;
+      current = current.next;
+    }
+
+    this.tail = newTail;
+    this.tail.next = null;
+
+    this.length--;
+
+    if (this.length === 0) {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return current;
+  }
 }
-
-// var first = new Node("Hi");
-// first.next = new Node("there");
-// first.next.next = new Node("how");
-
-// console.log(first);
 
 var list = new SinglyLinkedList();
 list.push("HELLO");
 list.push("GOOD BYE");
-
-console.log(list);
+list.push("!");

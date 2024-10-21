@@ -147,9 +147,46 @@ class SinglyLinkedList {
     this.length--;
     return removed;
   }
+
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null;
+
+    for (let i = 0; i < this.length; i++) {
+      // 다음 값을 미리 저장. 시작은 바꾸기 전의 head.
+      next = node.next;
+
+      // next를 이전 값으로 변경
+      node.next = prev;
+
+      // prev를 현재 값으로 변경
+      prev = node;
+
+      // node를 다음으로 한칸 이동.
+      node = next;
+    }
+
+    return this;
+  }
+
+  print() {
+    const arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+
+    console.log(arr);
+  }
 }
 
 var list = new SinglyLinkedList();
 list.push("HELLO");
 list.push("GOOD BYE");
 list.push("!");
+list.push("!!!");
+list.push("@");

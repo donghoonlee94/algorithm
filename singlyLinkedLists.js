@@ -111,6 +111,31 @@ class SinglyLinkedList {
 
     return current;
   }
+
+  set(idx, val) {
+    const foundNode = this.get(idx);
+
+    if (!foundNode) return false;
+
+    foundNode.val = val;
+
+    return true;
+  }
+
+  insert(idx, val) {
+    if (idx < 0 || idx > this.length) return false;
+    if (idx === this.length) return !!this.push(val);
+    if (idx === 0) return !!this.unshift(val);
+
+    const newNode = new Node(val);
+    const prev = this.get(idx - 1);
+    let temp = prev.next;
+
+    prev.next = newNode;
+    newNode.next = temp;
+    this.length++;
+    return true;
+  }
 }
 
 var list = new SinglyLinkedList();

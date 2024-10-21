@@ -190,3 +190,10 @@ list.push("GOOD BYE");
 list.push("!");
 list.push("!!!");
 list.push("@");
+
+// Big O of Singly Linked Lists
+
+// Insertion - O(1)
+// Removal - O(1) or O(n)
+// Searching - O(n)
+// Access - O(n)

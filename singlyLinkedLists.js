@@ -97,6 +97,20 @@ class SinglyLinkedList {
 
     return this;
   }
+
+  get(idx) {
+    if (idx < 0 || idx >= this.length) return null;
+
+    let current = this.head;
+    let count = 0;
+
+    while (count !== idx) {
+      current = current.next;
+      count++;
+    }
+
+    return current;
+  }
 }
 
 var list = new SinglyLinkedList();

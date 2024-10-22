@@ -42,3 +42,10 @@ class Stack {
     return temp.value;
   }
 }
+
+// Big O of STACKS
+
+// insertion - O(1)
+// Removal - O(1)
+// Searching - O(N)
+// Access - O(N)

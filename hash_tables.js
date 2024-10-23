@@ -112,3 +112,8 @@ ht.set("plum", "#DDA0DD");
 ht.set("purple", "#DDA0DD");
 ht.set("violet", "#DDA0DD");
 ht.set("violet", "#DDA9DD");
+
+// Big O of HASH TABLES
+// Insert - O(1)
+// Deletion - O(1)
+// Access - O(1)

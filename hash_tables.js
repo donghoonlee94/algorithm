@@ -24,3 +24,7 @@ function hash(key, arrayLen) {
 
   return total;
 }
+
+// How to collision
+// 1. Seperate Chaning  > 데이터를 함께 저장 > 데이터 안에서 루프를 돌아 값을 찾음
+// 2. Linear Probing  > 데이터가 있을 경우 다음 빈 곳의 영역을 찾아서 저장.

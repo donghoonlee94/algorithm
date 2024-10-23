@@ -25,6 +25,24 @@ function hash(key, arrayLen) {
   return total;
 }
 
-// How to collision
+// How to solve a collision
 // 1. Seperate Chaning  > 데이터를 함께 저장 > 데이터 안에서 루프를 돌아 값을 찾음
 // 2. Linear Probing  > 데이터가 있을 경우 다음 빈 곳의 영역을 찾아서 저장.
+
+class HashTable {
+  constructor(size = 53) {
+    this.keyMap = new Array(size);
+  }
+
+  _hash(key) {
+    let total = 0;
+    let WEIRD_PRIME = 31;
+    for (let i = 0; i < Math.min(key.length, 100); i++) {
+      let char = key[i];
+      let value = char.charCodeAt(0) - 96;
+      total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+    }
+
+    return total;
+  }
+}

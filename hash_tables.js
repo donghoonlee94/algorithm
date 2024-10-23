@@ -45,4 +45,22 @@ class HashTable {
 
     return total;
   }
+
+  set(key, value) {
+    let index = this._hash(key);
+    if (!this.keyMap[index]) {
+      this.keyMap[index] = [];
+    }
+
+    this.keyMap[index].push([key, value]);
+    return index;
+  }
+
+  get() {}
 }
+
+let ht = new HashTable();
+ht.set("hello hash", "bye");
+ht.set("dogs", "are cool");
+ht.set("cats", "are fine");
+ht.set("i love", "pizza");

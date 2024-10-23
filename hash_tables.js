@@ -30,7 +30,7 @@ function hash(key, arrayLen) {
 // 2. Linear Probing  > 데이터가 있을 경우 다음 빈 곳의 영역을 찾아서 저장.
 
 class HashTable {
-  constructor(size = 53) {
+  constructor(size = 17) {
     this.keyMap = new Array(size);
   }
 
@@ -56,11 +56,26 @@ class HashTable {
     return index;
   }
 
-  get() {}
+  get(key) {
+    let index = this._hash(key);
+    if (this.keyMap[index]) {
+      for (let i = 0; i < this.keyMap[index].length; i++) {
+        if (this.keyMap[index][i][0] === key) {
+          return this.keyMap[index][i][1];
+        }
+      }
+      return this.keyMap[index];
+    }
+
+    return undefined;
+  }
 }
 
-let ht = new HashTable();
-ht.set("hello hash", "bye");
-ht.set("dogs", "are cool");
-ht.set("cats", "are fine");
-ht.set("i love", "pizza");
+let ht = new HashTable(17);
+ht.set("maroon", "#800000");
+ht.set("yellow", "#FFFF00");
+ht.set("olive", "#808000");
+ht.set("salmon", "#FA8072");
+ht.set("lightcoral", "#F08080");
+ht.set("mediumvioletred", "#C71585");
+ht.set("plum", "#DDA0DD");

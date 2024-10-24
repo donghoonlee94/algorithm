@@ -23,11 +23,34 @@ const result = countOddNumbers("1,2,3,4,5");
 // index 0 > value 1 > isOdd 1 + (recursion(0 + 1 = 1) => 2) > 3
 // result : 3
 
+// function factorial(num) {
+//   let total = 1;
+//   for (let i = num; i > 1; i--) {
+//     total *= i;
+//   }
+
+//   return total;
+// }
+
 function factorial(num) {
-  let total = 1;
-  for (let i = num; i > 1; i--) {
-    total *= i;
+  if (num === 1) return 1;
+  return num * factorial(num - 1);
+}
+
+// Pure recursion
+function collectOddValues(arr) {
+  let newArr = [];
+
+  if (arr.length === 0) {
+    return newArr;
   }
 
-  return total;
+  if (arr[0] % 2 !== 0) {
+    newArr.push(arr[0]);
+  }
+
+  newArr = newArr.concat(collectOddValues(arr.slice(1)));
+  return newArr;
 }
+
+collectOddValues([1, 2, 3, 4, 5]);

@@ -22,3 +22,12 @@ const result = countOddNumbers("1,2,3,4,5");
 // index 1 > value 2 > isOdd 0 + (recursion(1 + 1 = 2) => 2) > 2
 // index 0 > value 1 > isOdd 1 + (recursion(0 + 1 = 1) => 2) > 3
 // result : 3
+
+function factorial(num) {
+  let total = 1;
+  for (let i = num; i > 1; i--) {
+    total *= i;
+  }
+
+  return total;
+}

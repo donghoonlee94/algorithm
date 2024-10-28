@@ -20,16 +20,16 @@ class ListNode implements INode {
   }
 }
 
-interface DoublyLinkedList {
-  head: ListNode | null;
-  tail: ListNode | null;
+interface IDoublyLinkedList {
+  head: INode | null;
+  tail: INode | null;
   length: number;
-  push(val: string | number): DoublyLinkedList;
+  push(val: string | number): IDoublyLinkedList;
 }
 
-class DoublyLinkedList implements DoublyLinkedList {
-  head: ListNode | null;
-  tail: ListNode | null;
+class DoublyLinkedList implements IDoublyLinkedList {
+  head: INode | null;
+  tail: INode | null;
   length: number;
 
   constructor() {
@@ -38,7 +38,7 @@ class DoublyLinkedList implements DoublyLinkedList {
     this.length = 0;
   }
 
-  push(val: string | number): DoublyLinkedList {
+  push(val: string | number): IDoublyLinkedList {
     const newNode = new ListNode(val);
     if (this.length === 0) {
       this.head = newNode;
@@ -52,14 +52,29 @@ class DoublyLinkedList implements DoublyLinkedList {
     this.length++;
     return this;
   }
+
+  pop(): INode | undefined | null {
+    if (!this.head) return undefined;
+    const poppedNode = this.tail;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.tail = poppedNode?.prev ?? null;
+      this.tail!.next = null;
+      poppedNode!.prev = null;
+    }
+    this.length--;
+    return poppedNode;
+  }
 }
 
-const List = new DoublyLinkedList();
+const list = new DoublyLinkedList();
 const node1 = new ListNode(12);
 node1.next = new ListNode(11);
 
-List.push(99);
-List.push(100);
+list.push(99);
+list.push(100);
 
-console.log(List);
+console.log(list);
 console.log(node1);

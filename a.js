@@ -6,4 +6,4 @@ const C = require("./modules.js");
 
 exports.A = "Test";
 
-console.log("circular dependency", C);
+console.log("circular dependency -> Empty object", C);

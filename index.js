@@ -1,1 +1,3 @@
-import { A, B } from "./modules.js";
+const { A, B } = require("./modules.js");
+
+B();

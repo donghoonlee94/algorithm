@@ -13,7 +13,7 @@ class DoublyLinkedList {
     this.length = 0;
   }
   push(val) {
-    var newNode = new Node(val);
+    let newNode = new Node(val);
     if (this.length === 0) {
       this.head = newNode;
       this.tail = newNode;
@@ -27,7 +27,7 @@ class DoublyLinkedList {
   }
   pop() {
     if (!this.head) return undefined;
-    var poppedNode = this.tail;
+    let poppedNode = this.tail;
     if (this.length === 1) {
       this.head = null;
       this.tail = null;
@@ -38,5 +38,20 @@ class DoublyLinkedList {
     }
     this.length--;
     return poppedNode;
+  }
+  shift() {
+    if (!this.head || this.length === 0) return undefined;
+    let oldHead = this.head;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      this.head = oldHead.next;
+      this.head.prev = null;
+      oldHead.next = null;
+    }
+
+    this.length--;
+    return oldHead;
   }
 }

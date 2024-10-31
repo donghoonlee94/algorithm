@@ -61,12 +61,26 @@ class DoublyLinkedList {
       this.head = newNode;
       this.tail = newNode;
     } else {
-      newNode.next = this.head;
       this.head.prev = newNode;
+      newNode.next = this.head;
       this.head = newNode;
     }
 
     this.length++;
     return this;
+  }
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    const isStart = index <= this.length / 2;
+    console.log("isStart", isStart, index, this.length / 2);
+    let count = isStart ? 0 : this.length - 1;
+    let current = isStart ? this.head : this.tail;
+
+    while (count !== index) {
+      current = isStart ? current.next : current.prev;
+      isStart ? count++ : count--;
+    }
+
+    return current;
   }
 }

@@ -127,3 +127,9 @@ class DoublyLinkedList {
     return removedNode;
   }
 }
+
+// Big O
+// insertion O(1) || O(n)
+// Removal O(1) || O(n)
+// Searching O(N)
+// Access O(N)

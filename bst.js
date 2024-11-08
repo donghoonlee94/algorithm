@@ -58,6 +58,7 @@ class BinarySearchTree {
         }
       }
 
+      if (!found) return undefined;
       return current;
     }
   }
@@ -75,3 +76,7 @@ tree.insert(11);
 tree.insert(2);
 tree.insert(16);
 tree.insert(7);
+
+// Big O of BST
+// Insertion - O(log n)
+// Searching - O(log n)
